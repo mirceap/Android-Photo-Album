@@ -1,12 +1,16 @@
 package id.csie.ase.ro.photoalbum;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
+    FloatingActionButton button;
+
     int[] _list;
 
     @Override
@@ -15,6 +19,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recyclerView);
+        button = findViewById(R.id.fab);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // take me to
+                // Get Random Photo from ImageService
+                // Open camera and "Take Photo"
+            }
+        });
+
         GridLayoutManager manager = new GridLayoutManager(MainActivity.this, 2);
         recyclerView.setLayoutManager(manager);
 

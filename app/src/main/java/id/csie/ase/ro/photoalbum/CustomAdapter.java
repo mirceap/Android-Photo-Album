@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class CustomAdapter extends RecyclerView.Adapter {
     private Context mContext;
@@ -30,6 +31,8 @@ public class CustomAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(final RecyclerView.ViewHolder viewHolder, int position) {
         if (viewHolder instanceof PlaceViewHolder){
             ((PlaceViewHolder) viewHolder).mPlace.setImageResource(_list[position]);
+            ((PlaceViewHolder) viewHolder).mPlace.setTag(_list[position]);
+            ((PlaceViewHolder) viewHolder).textOnTop.setText(_list[position]);
             ((PlaceViewHolder) viewHolder).mPlace.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -48,10 +51,12 @@ public class CustomAdapter extends RecyclerView.Adapter {
 
     class PlaceViewHolder extends RecyclerView.ViewHolder {
         ImageView mPlace;
+        TextView textOnTop;
 
         public PlaceViewHolder(View itemView) {
             super(itemView);
             mPlace = itemView.findViewById(R.id.imageView);
+            textOnTop = itemView.findViewById(R.id.imageViewText);
         }
     }
 }

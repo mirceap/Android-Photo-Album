@@ -17,6 +17,7 @@
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/image_10" />
 
+
     <!--<TextView-->
         <!--android:id="@+id/textView"-->
         <!--android:layout_width="wrap_content"-->
