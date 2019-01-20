@@ -1,5 +1,6 @@
 package id.csie.ase.ro.photoalbum;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent detailed = new Intent(getApplicationContext(), AddImageActivity.class);
+                //detailed.putExtra("Image", imageLink);
+                startActivityForResult(detailed, 2);
                 // take me to
                 // Get Random Photo from ImageService
                 // Open camera and "Take Photo"
@@ -38,5 +42,14 @@ public class MainActivity extends AppCompatActivity {
 
         CustomAdapter adapter = new CustomAdapter(MainActivity.this, _list);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 2 &&  resultCode == RESULT_OK){
+            
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
 }

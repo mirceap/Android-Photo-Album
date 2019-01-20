@@ -2,13 +2,15 @@ package id.csie.ase.ro.photoalbum;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
+import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.RatingBar;
 
 public class CustomAdapter extends RecyclerView.Adapter {
     private Context mContext;
@@ -32,17 +34,26 @@ public class CustomAdapter extends RecyclerView.Adapter {
         if (viewHolder instanceof PlaceViewHolder){
             ((PlaceViewHolder) viewHolder).mPlace.setImageResource(_list[position]);
             ((PlaceViewHolder) viewHolder).mPlace.setTag(_list[position]);
-            ((PlaceViewHolder) viewHolder).textOnTop.setText(_list[position]);
+             final float ratingStar = ((PlaceViewHolder) viewHolder).ratingBar.getRating();
             ((PlaceViewHolder) viewHolder).mPlace.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent detailed = new Intent(mContext, DetailActivity.class);
                     detailed.putExtra("Image", _list[viewHolder.getAdapterPosition()]);
+                    detailed.putExtra("Rating", ratingStar);
+                    //detailed.putExtra("viewHolder", (Parcelable) viewHolder);
                     mContext.startActivity(detailed);
+                    //((Activity) mContext).startActivityForResult(detailed, 0);
                 }
             });
         }
     }
+//
+//    public void addItem(Bitmap image, float rating){
+//        View newView = new View();
+//        PlaceViewHolder newItem = new PlaceViewHolder();
+//    }
+
 
     @Override
     public int getItemCount() {
@@ -51,12 +62,16 @@ public class CustomAdapter extends RecyclerView.Adapter {
 
     class PlaceViewHolder extends RecyclerView.ViewHolder {
         ImageView mPlace;
-        TextView textOnTop;
+        RatingBar ratingBar;
 
         public PlaceViewHolder(View itemView) {
             super(itemView);
             mPlace = itemView.findViewById(R.id.imageView);
-            textOnTop = itemView.findViewById(R.id.imageViewText);
+            ratingBar = itemView.findViewById(R.id.ratingBar);
+        }
+
+        public void setmPlace(ImageView mPlace) {
+            this.mPlace = mPlace;
         }
     }
 }
